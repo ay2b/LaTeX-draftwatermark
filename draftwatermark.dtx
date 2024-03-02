@@ -40,7 +40,7 @@
 %
 % \fi
 %
-% \CheckSum{576}
+% \CheckSum{577}
 %
 % \def\filename{draftwatermark.dtx}
 % \def\fileversion{3.2}
@@ -1009,7 +1009,7 @@
   \fi}
 %    \end{macrocode}
 %
-% \dots\, and finally the code to set up the \Lpack{everypage} hooks to
+% \dots\, now, the code to set up the \Lpack{everypage} hooks to
 % assure that the watermark printing commands are called when needed
 %    \begin{macrocode}
 \ifdraftwatermark@firstpageonly
@@ -1019,6 +1019,19 @@
   \AddToHook{shipout/background}{%
     \draftwatermark@print{\draftwatermark@markcmd}}%
 \fi
+%    \end{macrocode}
+% Finally, declare precedence rules with respect to shipout/background
+% hooks that may be set up by other packages. These are important
+% because they end up controlling the stacking of background
+% artifacts. Specifically, the draft watermark should go below
+% anything else. A notable package that must be considered is
+% \Lpack{eso-pic}, particularly because it gets used by
+% \Lpack{pdfpages}
+% \changes{R3.2}{2024/03/03}{Declare precedence rules with respect to
+%   other users of the shipout/background hook. This fixes the
+%   background stacking order when using \Lpack{pdfpages}.}%
+%    \begin{macrocode}
+\DeclareHookRule{shipout/background}{draftwatermark}{<}{eso-pic}
 %    \end{macrocode}
 % \iffalse
 %</draftwatermark>
