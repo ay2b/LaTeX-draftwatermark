@@ -1,0 +1,24 @@
+\documentclass[]{article}
+
+%Packages 
+\usepackage{pdfpages}
+\usepackage[stamp,color=red!10]{draftwatermark}
+\usepackage{lipsum}
+\usepackage[T1]{fontenc} % use T1 encoded fonts in output -- 256 glyphs vs. 128, also <> symbols work
+\usepackage[utf8]{inputenc} % allow for utf8 encoding in the .tex files
+\usepackage{lmodern} % use latin modern font (updated replacement vs. cm), have to load AFTER fontenc
+
+\begin{document}
+\textbf{Watermark is under the text}
+\lipsum[1-3]
+\textbf{In the following page, the watermark is over the inserted PDF:}
+\clearpage
+
+\includepdf[pages={1-},		    %Select pages from 3 onward to end
+	scale=0.86,					%Tweak scale to fit within margin of output. 0.86 is max to fit
+	trim=1in 1in 1in 1in, clip, %[left bot right top]: Clip off margins of source doc, 1" margins
+	landscape=false, angle=0,   %don't use landscape or rotate
+	frame=true,                 %add frame (may be turned off)
+	pagecommand={}]             %Needed to prevent empty page format (which deletes template headers/footers)
+	{test_include.pdf}   %Included file
+\end{document}
