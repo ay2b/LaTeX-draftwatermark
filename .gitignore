@@ -10,4 +10,6 @@ draftwatermark.log
 draftwatermark.pdf
 draftwatermark*.sty
 draftwatermark.gls
+draftwatermark.hd
+draftwatermark.out
 test_draftwatermark-?.*
