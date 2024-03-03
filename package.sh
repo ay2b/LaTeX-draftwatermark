@@ -9,7 +9,7 @@ TESTENGINES=("pdflatex")
 
 pkg_version=$(pcregrep -o1 '\\fileversion\{(.*)}' $PKGNAME.dtx)
 pkg_date=$(pcregrep -o1 '\\filedate\{(.*)}' $PKGNAME.dtx)
-PKGVERS=$(echo $version | sed 's/\./-/')
+PKGVERS=$(echo $pkg_version | sed 's/\./-/')
 
 check() {
     echo "Found package version $pkg_version @ $pkg_date"
