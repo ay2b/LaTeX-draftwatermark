@@ -10,8 +10,7 @@ TESTENGINES=("pdflatex")
 version=$(grep fileversion\{ $PKGNAME.dtx | sed 's/.*{\(.*\)}.*/\1/')
 PKGVERS=$(echo $version | sed 's/\./-/')
 
-build()
-  {
+build () {
     mkdir -p buildpkg/workdir
     cp "$PKGNAME".dtx "$PKGNAME".ins "${PKGCNT[@]}" buildpkg/workdir/
     cd buildpkg/workdir
@@ -30,10 +29,9 @@ EOF
     lualatex "$PKGNAME".dtx
     cp "$PKGNAME".pdf doc/latex/"$PKGNAME"/
     cd -
-  }
+}
 
-do_test()
-  {
+do_test() {
     mkdir -p buildpkg/testdir
     cp buildpkg/workdir/tex/latex/"$PKGNAME"/"$PKGNAME".sty buildpkg/testdir
     cp buildpkg/workdir/doc/latex/"$PKGNAME"/examples/* buildpkg/testdir
@@ -44,10 +42,9 @@ do_test()
         done
     done
     cd -
-  }
+}
 
-package()
-  {  
+package() {  
     mkdir -p buildpkg/"$PKGNAME"_"$PKGVERS"
     cp "$PKGNAME".dtx "$PKGNAME".ins "${PKGCNT[@]}" \
        buildpkg/"$PKGNAME"_"$PKGVERS"/
@@ -55,14 +52,13 @@ package()
     cd buildpkg
     zip -r -9 "$PKGNAME"_"$PKGVERS".zip "$PKGNAME"_"$PKGVERS"
     cd -
-  }
+}
 
-clean()
-  {
+clean() {
     cd buildpkg
     rm -fr ./workdir ./testdir ./"$PKGNAME"_"$PKGVERS" ./"$PKGNAME".tds.zip
     cd -
-  }
+}
     
 build
 do_test
