@@ -41,3 +41,8 @@
 - R3.2
   - Fix name of legacy package in \ProvidesPackage;
   - Fix version number of main package in \ProvidesPackage.
+
+- R3.3
+  - Declare precedence rules with respect to other users (eso-pic) of
+    the shipout/background hook. This fixes the background stacking
+    order when using pdfpages
