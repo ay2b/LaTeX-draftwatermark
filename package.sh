@@ -5,13 +5,13 @@ PKGCNT=("README.md")
 TESTFILES=("test_draftwatermark-1" "test_draftwatermark-2" \
            "test_draftwatermark-3" "test_draftwatermark-4" \
            "test_draftwatermark-5")
-TESTENGINES=("pdflatex") 
+TESTENGINES=("pdflatex")
 
 pkg_version=$(pcregrep -o1 '\\fileversion\{(.*)}' $PKGNAME.dtx)
 pkg_date=$(pcregrep -o1 '\\filedate\{(.*)}' $PKGNAME.dtx)
 PKGVERS=$(echo $version | sed 's/\./-/')
 
-check() {    
+check() {
     echo "Found package version $pkg_version @ $pkg_date"
     provided_info=$(pcregrep -Mo1 \
     			     '\\ProvidesPackage{'$PKGNAME'}[^\[]*\[(.*)\]' \
@@ -70,7 +70,7 @@ do_test() {
     cd -
 }
 
-package() {  
+package() {
     mkdir -p buildpkg/"$PKGNAME"_"$PKGVERS"
     cp "$PKGNAME".dtx "$PKGNAME".ins "${PKGCNT[@]}" \
        buildpkg/"$PKGNAME"_"$PKGVERS"/
@@ -91,4 +91,4 @@ build
 do_test
 package
 clean
- 
+

@@ -80,7 +80,7 @@
 % \DoNotIndex{\wd, \wmbox}
 %
 % \setcounter{IndexColumns}{2}
-% \setlength{\IndexMin}{3cm}  
+% \setlength{\IndexMin}{3cm}
 %
 % \newcommand*{\Lpack}[1]{\textsf {#1}}           ^^A typeset a package
 % \newcommand*{\Lopt}[1]{\texttt {#1}}            ^^A typeset an option
@@ -95,7 +95,7 @@
 %
 % \author{%
 %   Sergio Callegari\thanks{Sergio Callegari can be reached at
-%       \texttt{sergio.callegari at gmail dot com}}} 
+%       \texttt{sergio.callegari at gmail dot com}}}
 %
 % \date{\docdate}
 %
@@ -117,7 +117,7 @@
 %   the \emph{KOMA script} bundle or directly using the new \hologo{LaTeX}
 %   shipout hooks.
 % \end{abstract}
-% 
+%
 % \section{Introduction}
 %
 % \changes{R1.0}{2006/06/30}{Initial release.}%
@@ -211,7 +211,7 @@
 % \begin{itemize}
 %   \changes{R1.1}{2012/01/06}{Introduce the ``stamp'', ``nostamp'' and
 %     ``final'' options to control whether the watermark should actually
-%     be printed.}^^A      
+%     be printed.}^^A
 % \item \verb!firstpageonly=true|false!\\
 %   If no value is provided, |true| is assumed. Default is |false|.\\
 %   Instructs \Lpack{draftwatermark} to only apply the watermark on the
@@ -459,7 +459,7 @@
 % \subsection{Compatibility notes for package version 3.0 and later}
 %
 % \changes{R3.0}{2020/12/08}{Remove dependency on package
-% \Lpack{everypage}.}^^A 
+% \Lpack{everypage}.}^^A
 % Version 3.0 of the package takes advantage of the new functionalities
 % introduced in \hologo{LaTeX} with the Fall 2020 release and gets rid of
 % its dependency on \Lpack{everypage}. In principle, this could result in
@@ -542,7 +542,7 @@
 % As an example, consider this first document source:
 %
 % \iffalse
-%<*samplecode-modern> 
+%<*samplecode-modern>
 % \fi
 %    \begin{macrocode}
 \documentclass{article}
@@ -579,7 +579,7 @@
 % Using the legacy interface, the source for the same sample document as
 % above would look like:
 % \iffalse
-%<*samplecode-legacy> 
+%<*samplecode-legacy>
 % \fi
 %    \begin{macrocode}
 \documentclass{article}
@@ -618,7 +618,7 @@
 % right top angle of every page. With the modern interface, such a result
 % can be easily obtained as in the following sample code:
 % \iffalse
-%<*samplecode-anchor> 
+%<*samplecode-anchor>
 % \fi
 %    \begin{macrocode}
 \documentclass{article}
@@ -655,7 +655,7 @@
 % of conditionals to achieve effects such as differentiating the watermark
 % for odd and even pages, as shown in the following code:
 % \iffalse
-%<*samplecode-dynamic> 
+%<*samplecode-dynamic>
 % \fi
 %    \begin{macrocode}
 \documentclass{article}
@@ -697,7 +697,7 @@
 % following example shows how it can be used, once again differentiating
 % the watermark for odd and even pages.
 %\iffalse
-%<*samplecode-custom> 
+%<*samplecode-custom>
 % \fi
 %    \begin{macrocode}
 \documentclass{article}
@@ -737,7 +737,7 @@
 %</samplecode-custom>
 % \fi
 %
-% 
+%
 % \section{Development and support}
 %
 % The package is developed on \emph{github}:
@@ -750,7 +750,7 @@
 % against some fundamental design decisions.
 %
 % \StopEventually {}
-% 
+%
 % \section{Implementation}
 % \subsection{Implementation of \Lpack{draftwatermark}}
 %
@@ -770,7 +770,7 @@
 % Depending on the actual functionalities provided by \hologo{LaTeX}
 % consider loading \Lpack{draftwatermark-2x}. If so doing, warn about this,
 % and hand over the operation to that package.
-%    \begin{macrocode} 
+%    \begin{macrocode}
 \@ifundefined{AddToHook}{%
   \PackageWarningNoLine{draftwatermark}{%
     You appear to be running a version of LaTeX\MessageBreak
@@ -868,7 +868,7 @@
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
 %    \end{macrocode}
-% 
+%
 % \dots\, and then disable the |firstpageonly| and |firstpage| options,
 % that can only be used at the package loading time.
 %    \begin{macrocode}
@@ -980,7 +980,7 @@
     \PackageError{draftwatermark}{%
       Illegal anchor directive `\draftwatermark@tempb'}%
         {Anchoring to left side.}%
-  \fi\fi\fi  
+  \fi\fi\fi
   \edef \draftwatermark@tempa{\draftwatermark@vanchor}%
   \@onelevel@sanitize \draftwatermark@tempa
   \expandafter\def\expandafter\draftwatermark@tempb
@@ -995,7 +995,7 @@
     \PackageError{draftwatermark}{%
       Illegal anchor directive `\draftwatermark@tempb'}%
         {Anchoring to top side.}%
-  \fi\fi\fi 
+  \fi\fi\fi
   \put(\@tempdima,\@tempdimb){\usebox\@tempboxa}%
 }
 
@@ -1133,7 +1133,7 @@
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
 %    \end{macrocode}
-% 
+%
 % \dots\, and then disable the |firstpageonly| and |firstpage| options,
 % that can only be used at the package loading time.
 %    \begin{macrocode}
@@ -1243,7 +1243,7 @@
     \PackageError{draftwatermark}{%
       Illegal anchor directive `\draftwatermark@tempb'}%
         {Anchoring to left side.}%
-  \fi\fi\fi  
+  \fi\fi\fi
   \edef \draftwatermark@tempa{\draftwatermark@vanchor}%
   \@onelevel@sanitize \draftwatermark@tempa
   \expandafter\def\expandafter\draftwatermark@tempb
@@ -1260,7 +1260,7 @@
     \PackageError{draftwatermark}{%
       Illegal anchor directive `\draftwatermark@tempb'}%
         {Anchoring to top side.}%
-  \fi\fi\fi 
+  \fi\fi\fi
   \vbox to 0pt {%
       \vspace*{-1in}%
       \vspace*{\@tempdimb}%
@@ -1317,7 +1317,7 @@
 %   Right brace   \}     Tilde         \~}
 \endinput
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: doctex
 %%% TeX-master: t
 %%% End:
