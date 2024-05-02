@@ -787,6 +787,7 @@
 \RequirePackage{kvoptions}
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}
+\RequirePackage{transparent}
 %    \end{macrocode}
 %
 % Define the configuration options and default values.
@@ -797,6 +798,8 @@
 \DeclareBoolOption[true]{stamp}
 \DeclareComplementaryOption{nostamp}{stamp}
 \DeclareComplementaryOption{final}{stamp}
+\DeclareBoolOption[true]{background}
+\DeclareComplementaryOption{foreground}{background}
 \DeclareStringOption[45]{angle}
 \DeclareStringOption[1]{scale}
 \DeclareStringOption[DRAFT]{text}
@@ -808,6 +811,7 @@
 \DeclareStringOption[c]{hanchor}
 \DeclareStringOption[m]{vanchor}
 \DeclareStringOption[c]{alignment}
+\DeclareStringOption[0]{transparency} % 0 = invisible ; 1 = full opaque
 \DeclareStringOption[\DraftwatermarkStdMark]{markcmd}
 \define@key{draftwatermark}{pos}{%
   \draftwatermark@processpos #1\@nil}
@@ -885,6 +889,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
 % Introduce the legacy interface.
 % \begin{macro}{\SetWatermarkAngle}
 %   Legacy command to set the rotation angle for the standard watermark
@@ -933,10 +938,12 @@
   \DraftwatermarkOptions{colormodel=#1, colorspec=#2}}
 \newcommand\SetWatermarkLightness[1]{%
   \DraftwatermarkOptions{colormodel=gray, colorspec=#1}}
-
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+\newcommand\SetWatermarkBackground{\DraftwatermarkOptions{background=true}}
+\newcommand\SetWatermarkForeground{\DraftwatermarkOptions{background=false}}
+\newcommand\SetWatermarkTransparency[1]{\DraftwatermarkOptions{transparency=#1}}
 %
 % \begin{macro}{\DraftwatermarkStdMark}
 % The command to generate the standard watermark
@@ -954,7 +961,8 @@
       \fi
       \setlength{\@tempdima}{\draftwatermark@fontsize}%
       \fontsize{\@tempdima}{1.2\@tempdima}\selectfont
-      \shortstack[\draftwatermark@alignment]{\draftwatermark@text}%
+      \shortstack[\draftwatermark@alignment]{%
+        \transparent{\draftwatermark@transparency}\draftwatermark@text}%
       \endgroup}}}
 
 %    \end{macrocode}
@@ -1012,11 +1020,17 @@
 % \dots\, now, the code to set up the \Lpack{everypage} hooks to
 % assure that the watermark printing commands are called when needed
 %    \begin{macrocode}
+\ifdraftwatermark@background
+  \def\draftwatermark@layer{background}
+\else
+  \def\draftwatermark@layer{foreground}
+\fi
+
 \ifdraftwatermark@firstpageonly
-  \AddToHookNext{shipout/background}{%
+  \AddToHookNext{shipout/\draftwatermark@layer}{%
     \draftwatermark@print{\draftwatermark@markcmd}}%
 \else
-  \AddToHook{shipout/background}{%
+  \AddToHook{shipout/\draftwatermark@layer}{%
     \draftwatermark@print{\draftwatermark@markcmd}}%
 \fi
 %    \end{macrocode}
@@ -1031,7 +1045,7 @@
 %   other users of the shipout/background hook. This fixes the
 %   background stacking order when using \Lpack{pdfpages}.}%
 %    \begin{macrocode}
-\DeclareHookRule{shipout/background}{draftwatermark}{<}{eso-pic}
+\DeclareHookRule{shipout/\draftwatermark@layer}{draftwatermark}{<}{eso-pic}
 %    \end{macrocode}
 % \iffalse
 %</draftwatermark>
